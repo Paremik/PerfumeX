@@ -94,10 +94,13 @@
       max-height: 500px;
     }
     .slides {
+      position: relative;
+      height: 500px;
       display: flex;
       transition: transform 0.5s ease-in-out;
     }
     .slide {
+      position: absolute;
       min-width: 100%;
       transition: opacity 1s ease-in-out;
     }
@@ -512,6 +515,9 @@
     slides.forEach(slide => slide.style.opacity = 0);
     slides[0].style.opacity = 1;
     setInterval(showNextSlide, 3000);
+
+
+
 
     const vendorsWrapper = document.getElementById("vendors-wrapper");
     const vendorItems = document.querySelectorAll(".carousel-vendors-item");
