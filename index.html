@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerfumeX</title>
+  <style>
+ 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: black;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: rgba(233, 154, 125, 0.916);
+      padding: 10px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 20px;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      gap: 20px;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .search-bar {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid black;
+      border-radius: 5px;
+      width: 400px;
+      text-align: left;
+    }
+    .search-button {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .search-button:hover {
+      background-color: #333;
+    }
+    .mini-sections {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .mini-section {
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .mini-section:hover {
+      opacity: 0.7;
+    }
+    .icon {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+    .logo {
+      margin-right: 20px;
+    }
+    .logo-img {
+      max-width: 150px;
+      height: auto;
+    }
+
+    .slider {
+      width: 100%;
+      max-width: 1200px;
+      margin: 20px auto;
+      overflow: hidden;
+      position: relative;
+      max-height: 500px;
+    }
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+    .container {
+      text-align: center;
+      padding: 50px;
+    }
+    .container h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .container p {
+      font-size: 18px;
+      margin-top: 0;
+    }
+    .btn {
+      background-color: rgb(204, 159, 96);
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: red;
+    }
+
+    footer {
+      background-color: rgba(221, 165, 146, 0.916);
+      color: rgb(0, 0, 0);
+      text-align: center;
+      padding: 20px 10px;
+      position: relative;
+      margin-top: 20px;
+    }
+    .info {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 10px;
+    }
+    .footer-icon {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+    .small-icon {
+      width: 80px;
+      height: 80px;
+    }
+    .vegan-icon {
+      width: 70px;
+      height: 70px;
+    }
+    .horizontal-line {
+      width: 100%;
+      height: 1px;
+      background-color: black;
+    }
+
+    .red-section {
+      background-color: rgba(221, 165, 146, 0.916);
+      color: white;
+      padding: 20px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .payment-info,
+    .delivery-text {
+      max-width: 1200px;
+      margin: 0;
+      padding: 0 20px;
+      color: black;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .payment-info h2,
+    .delivery-text h2 {
+      font-size: 24px;
+      margin: 0;
+    }
+    .payment-info img,
+    .delivery-text img {
+      width: 50px;
+      height: auto;
+    }
+
+    .vendors-slider {
+      max-width: 1200px;
+      margin: 40px auto;
+      position: relative;
+      background-color: transparent;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .carousel-vendors-item {
+      flex: 0 0 calc(100% / 6);
+      text-align: center;
+      padding: 13px;
+      transition: transform 0.2s;
+    }
+    .carousel-vendors-item:hover {
+      transform: scale(1.05);
+    }
+    .carousel-vendors-item img {
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      filter: grayscale(100%);
+      transition: filter 0.3s;
+    }
+    .carousel-vendors-item:hover img {
+      filter: grayscale(0%);
+    }
+    .swiper-wrapper {
+      display: flex;
+      align-items: center;
+      transition: transform 0.5s ease;
+    }
+    .vendors-slider .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.2);
+      border: none;
+      color: #fff;
+      font-size: 12px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      line-height: 20px;
+      text-align: center;
+    }
+    .vendors-slider .nav-prev {
+      left: 10px;
+    }
+    .vendors-slider .nav-next {
+      right: 10px;
+    }
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .search-bar {
+        width: 100%;
+      }
+      .mini-sections {
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .info {
+        flex-direction: column;
+      }
+      .info-item {
+        margin: 10px 0;
+      }
+      .payment-info {
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .red-section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .delivery-text {
+        padding: 10px 0;
+      }
+      .vendors-slider {
+        padding: 10px;
+      }
+      .carousel-vendors-item {
+        flex: 0 0 calc(100% / 3);
+      }
+      .vendors-slider .nav-btn {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+        line-height: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p>Witamy w naszym sklepie!</p>
+  </header>
+  <div class="header-container">
+    <div class="logo">
+      <img src="image/logo.png" alt="Logo PerfumeX" class="logo-img">
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-bar" placeholder="Znajdź swój ulubiony zapach...">
+      <button class="search-button">Szukaj</button>
+    </div>
+    <div class="mini-sections">
+      <div class="mini-section">
+        <img src="image/account.jpg" alt="Ikona konta użytkownika" class="icon">
+      </div>
+      <div class="mini-section">
+        <img src="image/ulubione.jpg" alt="Ikona ulubionych produktów" class="icon">
+      </div>
+      <div class="mini-section">
+        <img src="image/koszyk.jpg" alt="Ikona koszyka zakupowego" class="icon">
+      </div>
+    </div>
+  </div>
+
+  <div class="slider">
+    <div class="slides">
+      <div class="slide">
+        <img src="image/AGRANDE-LOVENOTES-WEWGoldteaser-2220x813.jpg" alt="Perfumy 1">
+      </div>
+      <div class="slide">
+        <img src="image/kokoefkoefw.jpg" alt="Perfumy 2">
+      </div>
+      <div class="slide">
+        <img src="image/qwe.jpg" alt="Perfumy 3">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h1>Odkryj naszą wyjątkową kolekcję perfum</h1>
+    <p>Zapachy, które definiują Twój styl.</p>
+  </div>
+  <div class="vendors-slider">
+    <button class="nav-btn nav-prev" onclick="prevVendor()">&#10094;</button>
+    <button class="nav-btn nav-next" onclick="nextVendor()">&#10095;</button>
+    <div class="swiper-wrapper" id="vendors-wrapper" aria-live="off">
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="1 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/pages/axis-y">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-axis-y.webp?v=1682418242&amp;width=200" alt="Axis-Y" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="2 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/pages/estee-lauder">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-estee-lauder.svg?v=1682336811&amp;width=200" alt="Estee-Lauder" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="3 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/pages/kiko-millano">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-kiko-milano.svg?v=1682336811&amp;width=200" alt="Kiko Milano" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="4 / 16">
+        <div class="carousel-img">
+          <a href="/pages/origins">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/origins-logo.svg?v=1690267661&amp;width=719" alt="Origins" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="5 / 16">
+        <div class="carousel-img">
+          <a href="/pages/dermika">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-dermika-2.svg?v=1692692707&amp;width=200" alt="Dermika" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="6 / 16">
+        <div class="carousel-img">
+          <a href="/pages/health-labs-care">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-health-labs-care.svg?v=1682336812&amp;width=200" alt="Health Labs Care" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="7 / 16">
+        <div class="carousel-img">
+          <a href="/pages/clinique">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-clinique.svg?v=1682336811&amp;width=200" alt="Clinique" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="8 / 16">
+        <div class="carousel-img">
+          <a href="/collections/lancome">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-lancome.svg?v=1682336811&amp;width=200" alt="Lancome" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="9 / 16">
+        <div class="carousel-img">
+          <a href="/collections/biotherm">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-biotherm.svg?v=1682336811&amp;width=200" alt="Biotherm" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="10 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/pages/be-the-sky-girl">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo_1_big.png?v=1716814441&amp;width=410" alt="Be The Sky Girl" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="11 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/collections/paco-rabanne">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-paco-rabanne.svg?v=1682336811&amp;width=200" alt="Paco Rabanne" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="12 / 16">
+        <div class="carousel-img">
+          <a href="/collections/carolina-herrera">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-carolina-herrera.svg?v=1682336811&amp;width=340" alt="Carolina Herrera" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="13 / 16">
+        <div class="carousel-img">
+          <a href="/collections/hugo-boss">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-hugo-boss.svg?v=1682336811&amp;width=200" alt="Hugo Boss" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="14 / 16">
+        <div class="carousel-img">
+          <a href="/collections/tom-ford">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-tom-ford.svg?v=1682336827&amp;width=200" alt="Tom Ford" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="15 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/pages/nivea">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-nivea.svg?v=1719407601&amp;width=2000" alt="Nivea" loading="lazy">
+          </a>
+        </div>
+      </div>
+      <div class="carousel-vendors-item swiper-slide" role="group" aria-label="16 / 16">
+        <div class="carousel-img">
+          <a href="https://www.perfumeria.pl/pages/bielenda-professional">
+            <img src="https://www.perfumeria.pl/cdn/shop/files/logo-bilenda-professional.svg?v=1682336811&amp;width=200" alt="Bilenda Professional" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="info">
+      <div class="info-item">
+        <img src="image/box.png" alt="Nadanie paczki w następny dzień" class="footer-icon small-icon">
+        <span>Nadanie paczki w następny dzień</span>
+      </div>
+      <div class="info-item">
+        <img src="image/auto.png" alt="Szybka dostawa w ciągu 2-5 dni" class="footer-icon">
+        <span>Szybka dostawa w ciągu 2-5 dni</span>
+      </div>
+      <div class="info-item">
+        <img src="image/vegan.png" alt="Opakowania przyjazne środowisku" class="footer-icon vegan-icon">
+        <span>Opakowania przyjazne środowisku</span>
+      </div>
+      <div class="info-item">
+        <img src="image/help.png" alt="Pomoc techniczna 24/7" class="footer-icon small-icon">
+        <span>Pomoc techniczna 24/7</span>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="horizontal-line"></div>
+  <div class="red-section">
+    <div class="payment-info">
+      <h2>Formy płatności</h2>
+      <img src="https://media.douglas.pl/medias/Paypal.svg?context=bWFzdGVyfFBheW1lbnQtSWNvbnN8NTI1NnxpbWFnZS9zdmcreG1sfGFEazJMMmcyWXk4eE5URXlORGczTURBM01ETXdNaTlRWVhsd1lXd3VjM1pufGY2MjM4ZjVlNDhkYzA4MTI2YjM1ZDhmNzZjODUwOGM4MjQxOGFmMmI4OTlmMGE3OWYwYTkwMTFmZGJiMWNlZDM" alt="PayPal">
+      <img src="https://media.douglas.pl/medias/Mastercard.svg?context=bWFzdGVyfFBheW1lbnQtSWNvbnN8ODI1NnxpbWFnZS9zdmcreG1sfGFHUTVMMmcyTlM4eE5URXlORGczTURJMk5qa3hNQzlOWVhOMFpYSmpZWEprTG5OMlp3fDVjODM0MTE2MzgwMzE2OTkxZmIyYzJmZDdlNTAwZmU0ZTEwMmU3OWU2OGY4OWRiNmJiNDhhYTUzZGFmMmJhYTA" alt="Mastercard">
+      <img src="https://media.douglas.pl/medias/Visa.svg?context=bWFzdGVyfFBheW1lbnQtSWNvbnN8MTI2NnxpbWFnZS9zdmcreG1sfGFETXdMMmcyTmk4eE5URXlORGczTURJek5ERTBNaTlXYVhOaExuTjJad3xmOWZlOTI3OTVjZWI3YzZhM2YxYjViY2FjY2EwMWM0MGQwNGUyMWM5YWM4YTZkZTY4NDU4ZGEzOTY4OWVkZjE2" alt="Visa">
+      <img src="https://media.douglas.pl/medias/GPay.svg?context=bWFzdGVyfFBheW1lbnQtSWNvbnN8Mjc4NHxpbWFnZS9zdmcreG1sfGFETTRMMmcxT0M4eE5URXlORGczTURZMk1ERXlOaTlIVUdGNUxuTjJad3wwM2ZhYTQ3ZTBkYjFmNDA1OTI4MDhjMjIzZTIwNGE0ZDE4YTYxNzljOTVkNmRlYjRlOWYyZDk2OTlmNmU5NWNh" alt="GPay">
+    </div>
+    <div class="delivery-text">
+      <h2>Dostawa</h2>
+      <img src="https://media.douglas.pl/medias/DHL.svg?context=bWFzdGVyfFNoaXBwaW5nLUljb25zfDI0MDZ8aW1hZ2Uvc3ZnK3htbHxhR1l6TDJnek1DOHhOVEUyTlRVd01qQTVOVE01TUM5RVNFd3VjM1pufDY0YjQ1ZDY3ZTU0OGIwMGU5NzJjMzRjN2E0MmM2OGM4YjY3MmIzMmY1MDlhYzI5NmM5YjQ4MWNhYjlhOGM4YjU" alt="DHL">
+      <img src="https://media.douglas.pl/medias/Master-Shipping-InPost.svg?context=bWFzdGVyfFNoaXBwaW5nLUljb25zfDExMzgzfGltYWdlL3N2Zyt4bWx8YURnNEwyZ3haaTh4TmpBd01qVTVOakUzTlRrd01pOU5ZWE4wWlhKZlUyaHBjSEJwYm1kZlNXNVFiM04wTG5OMlp3fDBhZTk1NDE0ZDdhZmQyYTNkZjIxNGQzYmE2MTA2YWQxM2U4YzU3ZWZlZTZlYTdhZjYwYWUwYmQwMzhlZWI1OWQ" alt="InPost">
+    </div>
+  </div>
+  
+  <script>
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".slide");
+    function showNextSlide() {
+      slides[currentIndex].style.opacity = 0;
+      currentIndex = (currentIndex + 1) % slides.length;
+      slides[currentIndex].style.opacity = 1;
+    }
+    slides.forEach(slide => slide.style.opacity = 0);
+    slides[0].style.opacity = 1;
+    setInterval(showNextSlide, 3000);
+
+    const vendorsWrapper = document.getElementById("vendors-wrapper");
+    const vendorItems = document.querySelectorAll(".carousel-vendors-item");
+    const totalVendors = vendorItems.length;
+    let vendorIndex = 0;
+    function getVendorSlideWidth() {
+      return vendorItems[0].getBoundingClientRect().width;
+    }
+    
+    function updateVendorSlider() {
+      vendorsWrapper.style.transform = `translateX(-${vendorIndex * getVendorSlideWidth()}px)`;
+    }
+    
+    function nextVendor() {
+      vendorIndex = (vendorIndex + 1) % totalVendors;
+      updateVendorSlider();
+    }
+    
+    function prevVendor() {
+      vendorIndex = (vendorIndex - 1 + totalVendors) % totalVendors;
+      updateVendorSlider();
+    }
+    setInterval(nextVendor, 3000);
+    window.addEventListener("resize", () => {
+      vendorIndex = 0;
+      updateVendorSlider();
+    });
+  </script>
+</body>
+</html>
